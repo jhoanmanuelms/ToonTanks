@@ -13,3 +13,15 @@ ATank::ATank()
 	Camera->SetupAttachment(SpringArm);
 	SpringArm->SetupAttachment(RootComponent);
 }
+
+void ATank::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::Move);
+}
+
+void ATank::Move(float Value)
+{
+	UE_LOG(LogTemp, Display, TEXT("The move value is: %f"), Value);
+}
