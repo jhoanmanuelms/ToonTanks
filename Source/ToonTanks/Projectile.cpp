@@ -1,7 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Projectile.h"
+#include "GameFramework/DamageType.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -33,6 +35,13 @@ void AProjectile::Tick(float DeltaTime)
 
 void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	UE_LOG(LogTemp, Display, TEXT("Me pegaron perri"));
-	UE_LOG(LogTemp, Warning, TEXT("HitComp: %s | OtherActor: %s | OtherComp: %s"), *HitComp->GetName(), *OtherActor->GetName(), *OtherComp->GetName());
+	auto MyOwner = GetOwner();
+	if (MyOwner && OtherActor && OtherActor != this && OtherActor != MyOwner)
+	{
+		auto MyOwnerInstigator = MyOwner->GetInstigatorController();
+		auto DamageTypeClass = UDamageType::StaticClass();
+
+		UGameplayStatics::ApplyDamage(OtherActor, Damage, MyOwnerInstigator, MyOwner, DamageTypeClass);
+		Destroy();
+	}
 }
