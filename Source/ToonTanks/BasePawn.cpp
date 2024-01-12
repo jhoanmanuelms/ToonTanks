@@ -24,6 +24,11 @@ ABasePawn::ABasePawn()
 	ProjectileSpawnPoint->SetupAttachment(TurretMesh);
 }
 
+void ABasePawn::HandleDestruction()
+{
+	// TODO: Visual/sound effects
+}
+
 void ABasePawn::Fire()
 {
 	auto Projectile = GetWorld()->SpawnActor<AProjectile>(

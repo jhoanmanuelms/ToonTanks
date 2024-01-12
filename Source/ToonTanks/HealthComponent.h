@@ -30,6 +30,8 @@ private:
 
 	float Health = 0.f;
 
+	class AToonTanksGameMode* ToonTanksGameMode;
+
 	UFUNCTION()
 	void DamageTaken(AActor* DamageActor, float Damage, const UDamageType* DamageType, class AController* Instigator, AActor* DamageCauser);
 };
