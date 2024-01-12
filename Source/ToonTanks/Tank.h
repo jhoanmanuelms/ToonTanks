@@ -25,14 +25,14 @@ public:
 
 	void HandleDestruction();
 
-	APlayerController* GetPlayerController() const { return PlayerControllerRef; }
+	APlayerController* GetPlayerController() const { return PlayerController; }
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 private:
-	APlayerController* PlayerControllerRef;
+	APlayerController* PlayerController;
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float Speed = 200.f;
