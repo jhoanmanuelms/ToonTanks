@@ -4,6 +4,7 @@
 #include "GameFramework/DamageType.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Particles/ParticleSystemComponent.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -12,9 +13,12 @@ AProjectile::AProjectile()
 	PrimaryActorTick.bCanEverTick = false;
 
 	ProjectileMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Projectile Mesh"));
+	TrailParticles = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Smoke Trail"));
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Projectile Movement"));
 
 	RootComponent = ProjectileMesh;
+	TrailParticles->SetupAttachment(RootComponent);
+
 	ProjectileMovement->MaxSpeed = 1300.f;
 	ProjectileMovement->InitialSpeed = 1300.f;
 }
