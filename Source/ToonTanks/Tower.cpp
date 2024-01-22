@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Tank.h"
 #include "Tower.h"
+#include "Tank.h"
 #include "Kismet/GameplayStatics.h"
 #include "TimerManager.h"
 
@@ -31,7 +31,12 @@ void ATower::BeginPlay()
 
 void ATower::CheckFireCondition()
 {
-    if (InFireRange())
+	if (Tank == nullptr)
+	{
+		return;
+	}
+
+    if (InFireRange() && Tank->bAlive)
     {
         Fire();
     }
