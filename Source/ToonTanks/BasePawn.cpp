@@ -29,6 +29,12 @@ void ABasePawn::HandleDestruction()
 	if (DeathParticles)
 	{
 		UGameplayStatics::SpawnEmitterAtLocation(this, DeathParticles, GetActorLocation(), GetActorRotation());
+
+		if (DeathCameraShakeClass)
+		{
+			GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(DeathCameraShakeClass);
+		}
+
 		if (DeathSound)
 		{
 			UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation());
