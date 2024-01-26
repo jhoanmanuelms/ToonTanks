@@ -34,6 +34,8 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
+	bool bUsingController = false;
+
 	APlayerController* PlayerController;
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
@@ -41,6 +43,9 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float TurnRate = 45.f;
+
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float AimRate = 150.f;
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class USpringArmComponent* SpringArm;
@@ -51,4 +56,6 @@ private:
 	void Move(float Value);
 
 	void Turn(float Value);
+
+	void Aim(float Value);
 };

@@ -21,6 +21,7 @@ void ATank::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponen
 
 	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::Move);
 	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ATank::Turn);
+	PlayerInputComponent->BindAxis(TEXT("RotateTurret"), this, &ATank::Aim);
 
 	PlayerInputComponent->BindAction(TEXT("Fire"), IE_Pressed, this, &ATank::Fire);
 }
@@ -36,7 +37,7 @@ void ATank::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (PlayerController)
+	if (PlayerController && !bUsingController)
 	{
 		FHitResult HitResult;
 		PlayerController->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, HitResult);
@@ -64,4 +65,21 @@ void ATank::Turn(float Value)
 	FRotator DeltaRotation = FRotator::ZeroRotator; 
 	DeltaRotation.Yaw = Value * TurnRate * UGameplayStatics::GetWorldDeltaSeconds(this);
 	AddActorLocalRotation(DeltaRotation, true);
+}
+
+void ATank::Aim(float Value)
+{
+	if (Value != 0)
+	{
+		// If there's a non-zero entry to this method, we can assume a controller is being used so the mouse should be disabled
+		bUsingController = true;
+
+		FRotator DeltaRotation = FRotator::ZeroRotator; 
+		DeltaRotation.Yaw = Value * AimRate * UGameplayStatics::GetWorldDeltaSeconds(this);
+		TurretMesh->AddLocalRotation(DeltaRotation, true);
+		if (PlayerController)
+		{
+			PlayerController->SetMouseLocation(0, 0);
+		}
+	}
 }
