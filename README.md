@@ -4,6 +4,10 @@ ToonkTanks is a game developed using Unreal Engine 5 as part of the course [Unre
 
 # Credits
 
+## Assets
+- [Industry Props Pack 6](https://www.unrealengine.com/marketplace/en-US/product/3e2a3cb997cf47b1ab782a67957bfed0)
+- [Stylized Eastern Village](https://www.unrealengine.com/marketplace/en-US/product/stylized-eastern-village)
+
 ## Audio
 - Start game countdown: [Race Countdown.wav](https://freesound.org/people/aditwayer/sounds/434795/)
 - Win game sound: [piglevelwin2.mp3](https://freesound.org/people/Tuudurt/sounds/275104/)
