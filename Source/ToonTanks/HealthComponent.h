@@ -30,6 +30,9 @@ private:
 
 	float Health = 0.f;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	float HealthPercentage = 1.f;
+
 	class AToonTanksGameMode* ToonTanksGameMode;
 
 	UFUNCTION()

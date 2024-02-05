@@ -32,8 +32,6 @@ void UHealthComponent::BeginPlay()
 void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
 }
 
 void UHealthComponent::DamageTaken(AActor* DamageActor, float Damage, const UDamageType* DamageType, class AController* Instigator, AActor* DamageCauser)
@@ -41,6 +39,7 @@ void UHealthComponent::DamageTaken(AActor* DamageActor, float Damage, const UDam
 	if (Damage <= 0.f) return;
 
 	Health -= Damage;
+	HealthPercentage = Health / MaxHealth;
 
 	if (Health <= 0.f && ToonTanksGameMode)
 	{
